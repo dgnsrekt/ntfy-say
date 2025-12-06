@@ -1,7 +1,7 @@
 services:
   ntfy-say:
     build: .
-    restart: always
+    restart: unless-stopped
     env_file: .env
     environment:
       - PULSE_SERVER=unix:/run/user/1000/pulse/native
