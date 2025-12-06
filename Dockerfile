@@ -2,7 +2,7 @@ FROM golang:1.23-bookworm AS builder
 WORKDIR /app
 COPY go.mod ./
 COPY main.go ./
-RUN go build -o nfty-say .
+RUN go build -o ntfy-say .
 
 FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -22,9 +22,9 @@ RUN mkdir -p /models && \
     wget -q -O /models/en_US-amy-medium.onnx.json \
     "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/amy/medium/en_US-amy-medium.onnx.json"
 
-COPY --from=builder /app/nfty-say /usr/local/bin/
+COPY --from=builder /app/ntfy-say /usr/local/bin/
 COPY say.sh /usr/local/bin/say.sh
 RUN chmod +x /usr/local/bin/say.sh
 
-ENV NFTY_SAY=/usr/local/bin/say.sh
-CMD ["nfty-say"]
+ENV NTFY_SAY=/usr/local/bin/say.sh
+CMD ["ntfy-say"]

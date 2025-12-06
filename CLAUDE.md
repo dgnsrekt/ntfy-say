@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-nfty-say is a Go service that subscribes to ntfy.sh topics and speaks incoming messages using text-to-speech (Piper TTS via a say.sh script).
+ntfy-say is a Go service that subscribes to ntfy.sh topics and speaks incoming messages using text-to-speech (Piper TTS via a say.sh script).
 
 ## Commands
 
@@ -22,9 +22,9 @@ just docker-down  # Stop container
 ## Configuration
 
 Environment variables (via `.env` file, loaded automatically by justfile):
-- `NFTY_SERVER` - ntfy server URL (default: https://ntfy.sh)
-- `NFTY_TOPICS` - comma-separated topic list (required)
-- `NFTY_SAY` - TTS command path (supports `~/` expansion; pre-configured in Docker)
+- `NTFY_SERVER` - ntfy server URL (default: https://ntfy.sh)
+- `NTFY_TOPICS` - comma-separated topic list (required)
+- `NTFY_SAY` - TTS command path (supports `~/` expansion; pre-configured in Docker)
 
 Flags override env vars: `-server`, `-topics`, `-say`
 

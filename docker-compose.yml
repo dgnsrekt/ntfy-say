@@ -1,11 +1,11 @@
 services:
-  nfty-say:
+  ntfy-say:
     build: .
     restart: always
     env_file: .env
     environment:
       - PULSE_SERVER=unix:/run/user/1000/pulse/native
-      - NFTY_SAY=/usr/local/bin/say.sh
+      - NTFY_SAY=/usr/local/bin/say.sh
     volumes:
       - /run/user/1000/pulse:/run/user/1000/pulse:ro
       - ~/.config/pulse/cookie:/root/.config/pulse/cookie:ro

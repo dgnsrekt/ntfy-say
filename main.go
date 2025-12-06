@@ -37,18 +37,18 @@ type Config struct {
 
 func main() {
 	// Build defaults from env vars
-	defaultServer := getEnv("NFTY_SERVER", "")
-	defaultTopics := getEnv("NFTY_TOPICS", "")
-	defaultSay := getEnv("NFTY_SAY", "")
+	defaultServer := getEnv("NTFY_SERVER", "")
+	defaultTopics := getEnv("NTFY_TOPICS", "")
+	defaultSay := getEnv("NTFY_SAY", "")
 
 	// Parse command line flags (override env vars)
-	serverURL := flag.String("server", defaultServer, "ntfy server URL (env: NFTY_SERVER)")
-	topics := flag.String("topics", defaultTopics, "comma-separated list of topics (env: NFTY_TOPICS)")
-	sayCmd := flag.String("say", defaultSay, "TTS command to use (env: NFTY_SAY)")
+	serverURL := flag.String("server", defaultServer, "ntfy server URL (env: NTFY_SERVER)")
+	topics := flag.String("topics", defaultTopics, "comma-separated list of topics (env: NTFY_TOPICS)")
+	sayCmd := flag.String("say", defaultSay, "TTS command to use (env: NTFY_SAY)")
 	flag.Parse()
 
 	if *topics == "" {
-		log.Fatal("Error: -topics flag or NFTY_TOPICS env var is required")
+		log.Fatal("Error: -topics flag or NTFY_TOPICS env var is required")
 	}
 
 	config := Config{

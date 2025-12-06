@@ -6,11 +6,11 @@ default: run
 
 # Build the binary
 build:
-    go build -o nfty-say .
+    go build -o ntfy-say .
 
 # Run the service (builds first if needed)
 run: build
-    ./nfty-say
+    ./ntfy-say
 
 # Run with live reload (requires watchexec)
 watch:
@@ -18,7 +18,7 @@ watch:
 
 # Clean build artifacts
 clean:
-    rm -f nfty-say
+    rm -f ntfy-say
 
 # Docker recipes
 
