@@ -1,3 +1,3 @@
 module github.com/dgnsrekt/nfty-say
 
-go 1.24.10
+go 1.23

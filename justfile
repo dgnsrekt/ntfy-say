@@ -19,3 +19,25 @@ watch:
 # Clean build artifacts
 clean:
     rm -f nfty-say
+
+# Docker recipes
+
+# Build the Docker image
+docker-build:
+    docker compose build
+
+# Start the container (detached)
+docker-up:
+    docker compose up -d
+
+# Stop the container
+docker-down:
+    docker compose down
+
+# View container logs
+docker-logs:
+    docker compose logs -f
+
+# Rebuild and restart container
+docker-restart: docker-build
+    docker compose up -d --force-recreate
