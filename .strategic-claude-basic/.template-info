@@ -1,0 +1,20 @@
+{
+  "template": {
+    "id": "main",
+    "name": "Strategic Claude Basic",
+    "description": "Main template for general development projects with comprehensive Claude Code integration",
+    "repo_url": "https://github.com/Fomo-Driven-Development/strategic-claude-base.git",
+    "branch": "main",
+    "commit": "ca17762989afbce4b02a12deb150b20479e2a74f",
+    "tags": [
+      "general",
+      "default"
+    ]
+  },
+  "installed_at": "2025-12-05T22:11:09-06:00",
+  "installed_commit": "ca17762989afbce4b02a12deb150b20479e2a74f",
+  "metadata": {
+    "cli_version": "0.1.0",
+    "installation_type": "cli"
+  }
+}
