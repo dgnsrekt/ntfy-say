@@ -16,6 +16,10 @@ import (
 	"time"
 )
 
+const maxTTSFailures = 3
+
+var consecutiveTTSFailures int
+
 // Message represents an ntfy message
 type Message struct {
 	ID       string   `json:"id"`
@@ -73,7 +77,8 @@ func main() {
 
 func subscribe(config Config) {
 	topicList := strings.Join(config.Topics, ",")
-	url := fmt.Sprintf("%s/%s/json", config.ServerURL, topicList)
+	serverURL := ensureScheme(config.ServerURL)
+	url := fmt.Sprintf("%s/%s/json", serverURL, topicList)
 
 	for {
 		if err := connectAndListen(url, config); err != nil {
@@ -133,7 +138,13 @@ func handleMessage(msg Message, config Config) {
 
 	// Execute TTS command
 	if err := speak(config.SayCommand, text); err != nil {
-		log.Printf("TTS error: %v", err)
+		consecutiveTTSFailures++
+		log.Printf("TTS error (%d/%d): %v", consecutiveTTSFailures, maxTTSFailures, err)
+		if consecutiveTTSFailures >= maxTTSFailures {
+			log.Fatalf("TTS failed %d times consecutively, exiting to trigger container restart", maxTTSFailures)
+		}
+	} else {
+		consecutiveTTSFailures = 0
 	}
 }
 
@@ -160,4 +171,11 @@ func expandPath(path string) string {
 		return filepath.Join(home, path[2:])
 	}
 	return path
+}
+
+func ensureScheme(url string) string {
+	if !strings.HasPrefix(url, "http://") && !strings.HasPrefix(url, "https://") {
+		return "http://" + url
+	}
+	return url
 }

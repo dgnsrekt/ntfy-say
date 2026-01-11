@@ -7,5 +7,11 @@ services:
       - PULSE_SERVER=unix:/run/user/1000/pulse/native
       - NTFY_SAY=/usr/local/bin/say.sh
     volumes:
-      - /run/user/1000/pulse:/run/user/1000/pulse:ro
+      - /run/user/1000:/run/user/1000:ro
       - ~/.config/pulse/cookie:/root/.config/pulse/cookie:ro
+    healthcheck:
+      test: ["CMD", "pactl", "info"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
