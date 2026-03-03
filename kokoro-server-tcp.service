@@ -1,0 +1,11 @@
+[Unit]
+Description=Kokoro TTS TCP Server
+After=network.target
+
+[Service]
+ExecStart=/home/dgnsrekt/Services/ntfy-say/kokoro-env/bin/python /home/dgnsrekt/Services/ntfy-say/kokoro-server-tcp.py
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

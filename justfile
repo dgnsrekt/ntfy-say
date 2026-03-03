@@ -71,3 +71,25 @@ service-status:
 # View systemd service logs
 service-logs:
     journalctl --user -u ntfy-say.service -f
+
+# Remote Kokoro TTS server recipes (dev4-whitebox)
+
+# Deploy kokoro TCP server to dev4-whitebox and (re)start it
+deploy-remote:
+    rsync -av --mkpath \
+        kokoro-server-tcp.py \
+        kokoro-server-tcp.service \
+        dev4-whitebox.lan:Services/ntfy-say/
+    ssh dev4-whitebox.lan "\
+        mkdir -p ~/.config/systemd/user && \
+        cp Services/ntfy-say/kokoro-server-tcp.service ~/.config/systemd/user/ && \
+        systemctl --user daemon-reload && \
+        systemctl --user enable --now kokoro-server-tcp"
+
+# Tail logs from the remote kokoro TCP server
+remote-logs:
+    ssh dev4-whitebox.lan "journalctl --user -u kokoro-server-tcp -f"
+
+# Show status of the remote kokoro TCP server
+remote-status:
+    ssh dev4-whitebox.lan "systemctl --user status kokoro-server-tcp"
